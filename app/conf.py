@@ -12,3 +12,11 @@ def col_fecha_llamada():
 
 def get_cz_tec():
     return '***REMOVED***'
+
+
+def get_cz_adm():
+    return 'RAQUEL NAYSHA SORJANO ESPINOZA'
+
+
+def get_cz_post():
+    return '***REMOVED***'

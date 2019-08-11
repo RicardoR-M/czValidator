@@ -1,8 +1,8 @@
 import datetime
 from re import search
 
-from app.tec.conf import get_cz_tec, col_fecha_monitoreo, col_fecha_llamada
-from app.tec.plantillas import ErrorValidacion
+from app.conf import get_cz_tec, col_fecha_monitoreo, col_fecha_llamada, get_cz_adm, get_cz_post
+from app.plantillas import ErrorValidacion
 
 
 def usuario(value):
@@ -13,7 +13,7 @@ def usuario(value):
 def texto(value):
     if value is None:
         return True
-    return bool(search(r'[\#\!\_\-\+\!\¡0-9]+', value))
+    return bool(search(r'[\#\!\_\-\+\!\¡\.0-9]+', value))
 
 
 def fecha(value):
@@ -25,7 +25,7 @@ def fecha(value):
 def numero(value):
     if value is None:
         return True
-    return not bool(search(r'\d', str(value)))
+    return not bool(search(r'[\d.]+', str(value)))
 
 
 def no_vacio(value):
@@ -35,7 +35,7 @@ def no_vacio(value):
 
 
 def monitor_cz(value):
-    if value == get_cz_tec():
+    if value == get_cz_tec() or value == get_cz_adm() or value == get_cz_post():
         return False
     return True
 
