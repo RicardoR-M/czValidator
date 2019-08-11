@@ -59,6 +59,8 @@ def no_si(value):
 
 
 def detalle_nofcr(value):
+    if value is None:
+        return False
     return bool(search(r'\>', value))
 
 
