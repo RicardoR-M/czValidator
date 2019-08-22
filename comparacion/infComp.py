@@ -1,9 +1,10 @@
 import io
+
 from openpyxl import load_workbook
 from openpyxl.utils import column_index_from_string
 
-from app.conf import sheet_name, col_sn, col_fecha_monitoreo, col_fecha_llamada
-from app.plantillas import ErrorValidacion
+from conf import sheet_name, col_sn, col_fecha_monitoreo, col_fecha_llamada
+from plantillas import ErrorValidacion
 
 
 def comparator_cz(informe_anterior, informe_now):
@@ -34,7 +35,7 @@ def comparator_cz(informe_anterior, informe_now):
                                                                            fila=i + 1)
 
     # valida si la cantidad de evaluaciones del reporte anterior es menor que el actual
-    if len(dict_anterior) >= len(dict_now):
+    if len(dict_anterior) > len(dict_now):
         raise RuntimeError('Error: El informe anterior contiene más evaluaciones que el nuevo reporte')
 
     lista_errores = []

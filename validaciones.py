@@ -1,8 +1,8 @@
 import datetime
 from re import search
 
-from app.conf import get_cz_tec, col_fecha_monitoreo, col_fecha_llamada, get_cz_adm, get_cz_post
-from app.plantillas import ErrorValidacion
+from conf import get_cz_tec, col_fecha_monitoreo, col_fecha_llamada, get_cz_adm, get_cz_post
+from plantillas import ErrorValidacion
 
 
 def usuario(value):
@@ -16,6 +16,12 @@ def texto(value):
     return bool(search(r'[\#\!\_\-\+\!\¡\.0-9]+', value))
 
 
+def texto_none(value):
+    if value is None:
+        return False
+    return bool(search(r'[\#\!\_\-\+\!\¡\.0-9]+', value))
+
+
 def fecha(value):
     if not isinstance(value, datetime.datetime):
         return True
@@ -25,6 +31,12 @@ def fecha(value):
 def numero(value):
     if value is None:
         return True
+    return not bool(search(r'[\d.]+', str(value)))
+
+
+def telf(value):
+    if value is None or value == '':
+        return False
     return not bool(search(r'[\d.]+', str(value)))
 
 
@@ -47,7 +59,9 @@ def sino(value):
 
 
 def fcr(value):
-    if value.upper() == 'CLARO' or value.upper() == 'ASESOR' or value.upper() == 'CLIENTE' or value is None or value == '':
+    if value is None:
+        return False
+    if value.upper() == 'CLARO' or value.upper() == 'ASESOR' or value.upper() == 'CLIENTE' or value == '':
         return False
     return True
 

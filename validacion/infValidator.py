@@ -4,9 +4,9 @@ from time import time
 from openpyxl import load_workbook
 from openpyxl.utils import column_index_from_string
 
-from app.conf import sheet_name, col_fecha_monitoreo, col_fecha_llamada, validaciones_tec, validaciones_adm, validaciones_post
-from app.plantillas import ErrorValidacion
-from app.validaciones import usuario, texto, fecha, numero, no_vacio, monitor_cz, sino, fcr, no_si, detalle_nofcr, vacio, obs_recomendacion, sn, fechas_cz
+from conf import sheet_name, col_fecha_monitoreo, col_fecha_llamada, validaciones_tec, validaciones_adm, validaciones_post
+from plantillas import ErrorValidacion
+from validaciones import usuario, texto, fecha, numero, no_vacio, monitor_cz, sino, fcr, no_si, detalle_nofcr, vacio, obs_recomendacion, sn, fechas_cz, telf, texto_none
 
 
 def validador(item_dict, value, fila):
@@ -49,6 +49,12 @@ def validador(item_dict, value, fila):
     elif item_dict['tipo'] == 'obs_recomendacion':
         if obs_recomendacion(value):
             return ErrorValidacion(fila=fila, col=item_dict['col'], cabecera=item_dict['cabecera'], valor=value, msg='Celda Observaciones contiene guiones ---')
+    elif item_dict['tipo'] == 'telf':
+        if telf(value):
+            return ErrorValidacion(fila=fila, col=item_dict['col'], cabecera=item_dict['cabecera'], valor=value, msg='Celda contiene letras o caracteres inválidos')
+    elif item_dict['tipo'] == 'texto_none':
+        if texto_none(value):
+            return ErrorValidacion(fila=fila, col=item_dict['col'], cabecera=item_dict['cabecera'], valor=value, msg='Celda contiene caracteres inválidos')
     else:
         raise RuntimeError('Validacion no implementada: ' + item_dict['tipo'])
 
@@ -103,7 +109,7 @@ if __name__ == '__main__':
         validaciones = validaciones_tec
     elif skill.upper() == 'ADM':
         validaciones = validaciones_adm
-    elif skill.upper() == 'POST':
+    elif skill.upper() == 'POS':
         validaciones = validaciones_post
     else:
         raise RuntimeError('No se selecciono un skill correcto')
