@@ -15,6 +15,7 @@ def col_sn():
 
 
 def get_cz_tec():
+    # return '***REMOVED***'
     return '***REMOVED***'
 
 
