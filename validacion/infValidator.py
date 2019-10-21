@@ -6,7 +6,7 @@ from openpyxl.utils import column_index_from_string
 
 from conf import sheet_name, col_fecha_monitoreo, col_fecha_llamada, validaciones_tec, validaciones_adm, validaciones_post
 from plantillas import ErrorValidacion
-from validaciones import usuario, texto, fecha, numero, no_vacio, monitor_cz, sino, fcr, no_si, detalle_nofcr, vacio, obs_recomendacion, sn, fechas_cz, telf, texto_none
+from validaciones import usuario, texto, fecha, numero, no_vacio, monitor_cz, sino, fcr, no_si, detalle_nofcr, vacio, obs_recomendacion, sn, fechas_cz, telf, texto_none, tipo_llamada
 
 
 def validador(item_dict, value, fila):
@@ -55,6 +55,9 @@ def validador(item_dict, value, fila):
     elif item_dict['tipo'] == 'texto_none':
         if texto_none(value):
             return ErrorValidacion(fila=fila, col=item_dict['col'], cabecera=item_dict['cabecera'], valor=value, msg='Celda contiene caracteres inválidos')
+    elif item_dict['tipo'] == 'tipo_llamada':
+        if tipo_llamada(value):
+            return ErrorValidacion(fila=fila, col=item_dict['col'], cabecera=item_dict['cabecera'], valor=value, msg='Tipo de llamada incorrecto')
     else:
         raise RuntimeError('Validacion no implementada: ' + item_dict['tipo'])
 

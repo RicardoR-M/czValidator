@@ -110,3 +110,11 @@ def fechas_cz(monitoreo, llamada, fila):
                                cabecera='F.Monitoreo - F.Llamada',
                                valor=res, msg='Inconsistencia entre la fecha de monitoreo y llamada')
     return False
+
+
+def tipo_llamada(value):
+    if value is None:
+        return True
+    elif value != 'INFORMATIVO' and value != 'RECLAMO' and value != 'VARIACION':
+        return True
+    return False
