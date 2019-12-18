@@ -19,7 +19,7 @@ def texto(value):
 def texto_none(value):
     if value is None:
         return False
-    return bool(search(r'[\#\!\_\-\+\!\¡\.0-9]+', value))
+    return bool(search(r'[\#\!\_\-\+\!\¡0-9]+', value))
 
 
 def fecha(value):
