@@ -15,17 +15,15 @@ def col_sn():
 
 
 def get_cz_tec():
-    # return '***REMOVED***'
-    return '***REMOVED***'
+    return 'protected'
 
 
 def get_cz_adm():
-    return '***REMOVED***'
+    return 'protected'
 
 
 def get_cz_post():
-    # return '***REMOVED***'
-    return '***REMOVED***'
+    return 'protected'
 
 
 validaciones_tec = [dict(cabecera='CODIGO DEL ASESOR', col='A', tipo='usuario'),
